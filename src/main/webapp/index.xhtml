@@ -17,14 +17,10 @@
 <h:body>
 	<c:choose>
 		<c:when test="#{requestController.IsInRole()}">
-			<h:panelGrid width="100%">
-				<ui:include src="/WEB-INF/secured.xhtml"/>
-			</h:panelGrid>
+			<ui:include src="/WEB-INF/secured.xhtml"/>
 		</c:when>
 		<c:otherwise>
-			<h:panelGrid width="100%">
-				<ui:include src="/WEB-INF/login.xhtml"/>
-			</h:panelGrid>
+			<ui:include src="/WEB-INF/login.xhtml"/>
 		</c:otherwise>
 	</c:choose>
 </h:body>
