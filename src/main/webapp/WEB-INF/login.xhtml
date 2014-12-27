@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
+    "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xml:lang="en">
+	<h:body>
+		<ui:component>
+		<div>
+			<img id="topbanner" alt="topbanner" src="resources/topb.jpg" />
+		</div>
+		<div style="width: 100%; height: 60px;">
+			<img style="float: right;" src="resources/niksoft.jpg" alt="" />
+		</div>
+		<div>
+			<div style="float: left; margin: 40px; width: 200px;">
+				<img style=" width:auto; max-width:100%; height:auto;" id="qrcode" alt="qrcode" src="qrcode?s=4" />
+			</div>
+			<div style="float: left;">
+				<h:form id="login" name="login" method="post" prependId="false">
+					<label>Log In</label>
+
+					<p>
+						<label for="j_username">User Name:</label>
+						<h:inputText id="j_username" name="j_username" required="true" requiredMessage="Username Required" value="#{requestController.username}" />
+					</p>
+					<p>
+						<label for="j_password">Password:</label>
+						<h:inputSecret id="j_password" name="j_password" required="true" requiredMessage="Password Required" value="#{requestController.password}" />
+					</p>
+					<p>
+						<h:commandButton id="j_security_check" action="#{requestController.login()}" value="Log In"  />
+					</p>
+
+					<p>
+						<h:messages id="messages" errorStyle="color:red;" />
+					</p>
+				</h:form>
+			</div>
+
+           <div style="float: left; margin: 40px; width: 200px;">
+           	<img style=" width:auto; max-width:100%; height:auto;" id="testImage" />
+           </div>
+
+		</div>
+		<footer style="clear:both;width:100%;height: 640px;background-color:#555555;">
+
+		</footer>
+	    <script type="text/javascript" src="resources/login.js"></script>
+		<script type="text/javascript">
+			window.onload=function main(){
+				console.log('loaded.');
+				var graphicImg = document.getElementById("qrcode");
+				var canvas = document.createElement("canvas");
+				canvas.width = graphicImg.width;
+				canvas.height = graphicImg.height;
+				var context = canvas.getContext("2d");
+				context.drawImage(graphicImg, 0, 0);
+				var base64Image = canvas.toDataURL("image/jpeg");
+				
+				var testImageElement = document.getElementById("testImage");
+				testImageElement.src = base64Image;
+				
+				window.setInterval(loginwatch, 6000);
+			};
+		</script>
+		</ui:component>
+	</h:body>
+</html>

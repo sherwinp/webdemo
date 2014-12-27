@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+body {
+	background: white;
+    font-family: 'Bitstream Vera Sans', 'DejaVu Sans', Tahoma, sans-serif;
+    font-size: 12px;
+    line-height: 14px;
+    margin: 0 auto;
+}
+div.footer {height: 50px; bottom: 0;}
+img#topbanner {height:280px; width:100%;}
