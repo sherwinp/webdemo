@@ -14,8 +14,8 @@
 			</div>
 			<div>
 
-				<ul>
-					<li><h:outputText value="#{voucherBean.count}"></h:outputText></li>
+				<ul id="vouchers">
+					
 				</ul>
 
 			</div>
@@ -24,7 +24,73 @@
 			style="clear:both;width:100%;height: 640px;background-color:#555555;">
 
 		</footer>
-
+        <script type="text/javascript" src="resources/handlebars.js" ></script>
+		<script type="text/javascript">
+		  	function doGeolocation() {
+			    if (navigator.geolocation) {
+			      navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+			    } else {
+			      positionError(-1);
+			    }
+			}
+		    function positionError(err) {
+		        var msg;
+		        switch(err.code) {
+		          case err.UNKNOWN_ERROR:
+		            msg = "Unable to find your location";
+		            break;
+		          case err.PERMISSION_DENINED:
+		            msg = "Permission denied in finding your location";
+		            break;
+		          case err.POSITION_UNAVAILABLE:
+		            msg = "Your location is currently unknown";
+		            break;
+		          case err.BREAK:
+		            msg = "Attempt to find location took too long";
+		            break;
+		          default:
+		            msg = "Location detection not supported in browser";
+		        }
+		        document.getElementById('info').innerHTML = msg;
+		     }
+		    function positionSuccess(position) {
+		    	
+		    }
+			window.onload = function(){
+				doGeolocation();
+				$.ajax({
+					   url: 'api/vouchers',
+					   data: {
+					      format: 'json'
+					   },
+					   error: function() {
+						   console.log( "error ajax: load. " );
+					   },
+					   dataType: 'json',
+					   success: function(data) {
+						   console.log( "success." );
+					   },
+					   type: 'GET'
+					});
+			};
+		</script>
+	    <script id="container-template" type="x-handlebars-template">
+            <ul id="folders">
+            {{#each folders}}
+            <li><input type="checkbox" /><label for="folder">{{folder}}</label>
+      
+            <ul>
+              {{#each files}}
+               <li><a href="./">{{file}}</a></li>
+              {{/each}}
+            </ul>
+            </li>
+           {{/each}}
+           {{#each files}}
+               <li><a href="./">{{file}}</a></li>
+           {{/each}}
+            </ul>
+        </script>
 	</h:body>
 
 </html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+	
+	<persistence-unit name="webdemo-unit" transaction-type="RESOURCE_LOCAL">	
+		<jta-data-source>java:jboss/datasources/DemoDSsqlite</jta-data-source>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
+			<property name="show_sql" value="false" />
+        	<property name="format_sql" value="true" />
+			<property name="hibernate.dialect"  value="org.hibernate.dialect.SQLiteDialect"/>
+			<property name="jboss.entity.manager.factory.jndi.name" value="java:/MyEntityManagerFactory"/>
+		</properties>
+
+	</persistence-unit>
+</persistence>
