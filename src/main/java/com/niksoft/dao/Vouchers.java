@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
-@XmlRootElement
+@XmlRootElement(name="vouchers")
 @XmlSeeAlso({ Voucher.class })
 public class Vouchers extends ArrayList<Voucher> {
 	/**

@@ -14,9 +14,9 @@
 			</div>
 			<div>
 
-				<ul id="vouchers">
+				<div id="voucherslist">
 					
-				</ul>
+				</div>
 
 			</div>
 		</h:form>
@@ -69,26 +69,21 @@
 					   dataType: 'json',
 					   success: function(data) {
 						   console.log( "success." );
+				            var Source = document.getElementById('container-template').textContent;
+				            // Compile Template 
+				            var Template = Handlebars.compile(Source);
+				            console.log(data);
+				            $('#voucherslist').html(Template(data));
 					   },
 					   type: 'GET'
 					});
 			};
 		</script>
 	    <script id="container-template" type="x-handlebars-template">
-            <ul id="folders">
-            {{#each folders}}
-            <li><input type="checkbox" /><label for="folder">{{folder}}</label>
-      
-            <ul>
-              {{#each files}}
-               <li><a href="./">{{file}}</a></li>
+            <ul id="vouchers">
+           	  {{#each this}}
+               <li><a href="./">item</a></li>
               {{/each}}
-            </ul>
-            </li>
-           {{/each}}
-           {{#each files}}
-               <li><a href="./">{{file}}</a></li>
-           {{/each}}
             </ul>
         </script>
 	</h:body>

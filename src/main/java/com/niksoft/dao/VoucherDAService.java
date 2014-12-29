@@ -14,8 +14,8 @@ import javax.sql.DataSource;
 public class VoucherDAService extends GenericDataAccessService<Voucher, Integer> {
 	private static final Logger log = Logger.getLogger(VoucherDAService.class.getName());
 	@Override
-	public List<Voucher> findAll() {
-		List<Voucher> list = new Vouchers();
+	public Vouchers findAll() {
+		Vouchers list = new Vouchers();
 		try {
 			list =  execute("SELECT * FROM vouchers;", new mapped_values() );
 			
