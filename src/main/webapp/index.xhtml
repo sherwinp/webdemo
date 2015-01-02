@@ -14,8 +14,7 @@
 	<link rel="stylesheet" href="resources/style.css" type="text/css" />
 	<script type="text/javascript" src="resources/jquery.min.js"></script>
 </h:head>
-<h:body>
-	<c:choose>
+<c:choose>
 		<c:when test="#{requestController.IsInRole()}">
 			<ui:include src="/WEB-INF/secured.xhtml"/>
 		</c:when>
@@ -23,5 +22,4 @@
 			<ui:include src="/WEB-INF/login.xhtml"/>
 		</c:otherwise>
 	</c:choose>
-</h:body>
 </html>

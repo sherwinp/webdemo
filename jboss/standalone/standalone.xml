@@ -43,16 +43,12 @@
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
-                        <keystore path="application.keystore" relative-to="jboss.server.config.dir" keystore-password=""/>
+                        <keystore path="application.keystore" relative-to="jboss.server.config.dir" keystore-password="password"/>
                     </ssl>
                 </server-identities>
                 <authentication>
-                    <local default-user="$local" allowed-users="*"/>
-                    <properties path="application-users.properties" relative-to="jboss.server.config.dir"/>
+                    <jaas name="other"/>
                 </authentication>
-                <authorization>
-                    <properties path="application-roles.properties" relative-to="jboss.server.config.dir"/>
-                </authorization>
             </security-realm>
         </security-realms>
         <audit-log>
@@ -87,7 +83,7 @@
     <profile>
         <subsystem xmlns="urn:jboss:domain:logging:2.0">
             <console-handler name="CONSOLE">
-                <level name="INFO"/>
+                <level name="DEBUG"/>
                 <formatter>
                     <named-formatter name="COLOR-PATTERN"/>
                 </formatter>
@@ -118,8 +114,17 @@
             <logger category="jacorb.config">
                 <level name="ERROR"/>
             </logger>
+            <logger category="org.jboss.security">
+                <level name="TRACE"/>
+            </logger>
+            <logger category="org.jboss.as.web.security">
+                <level name="TRACE"/>
+            </logger>
+            <logger category="org.apache.catalina">
+                <level name="TRACE"/>
+            </logger>
             <root-logger>
-                <level name="INFO"/>
+                <level name="DEBUG"/>
                 <handlers>
                     <handler name="CONSOLE"/>
                     <handler name="FILE"/>
@@ -294,29 +299,17 @@
             <security-domains>
                 <security-domain name="other" cache-type="default">
                     <authentication>
+                        <login-module code="org.jboss.security.auth.spi.DatabaseServerLoginModule" flag="required">
+                            <module-option name="password-stacking" value="useFirstPass"/>
+                            <module-option name="dsJndiName" value="java:jboss/datasources/DemoDSsqlite"/>
+                            <module-option name="principalsQuery" value="SELECT PASSWORD FROM A_USER WHERE USERNAME=?"/>
+                            <module-option name="rolesQuery" value="SELECT r.ROLE_NAME, 'Roles' FROM A_ROLE r, A_USER_ROLE ur, A_USER u WHERE u.USERNAME=? AND u.ID=ur.FK_USER_ID AND ur.FK_ROLE_ID=r.ID"/>
+                        </login-module>
                         <login-module code="Remoting" flag="optional">
                             <module-option name="password-stacking" value="useFirstPass"/>
                         </login-module>
                         <login-module code="RealmDirect" flag="required">
                             <module-option name="password-stacking" value="useFirstPass"/>
-                        </login-module>
-                    </authentication>
-                </security-domain>
-                <security-domain name="LDAPAuth">
-                    <authentication>
-                        <login-module code="LdapExtended" flag="required">
-                            <module-option name="java.naming.factory.initial" value="com.sun.jndi.ldap.LdapCtxFactory"/>
-                            <module-option name="java.naming.provider.url" value="ldap://frontend:389"/>
-                            <module-option name="java.naming.security.authentication" value="simple"/>
-                            <module-option name="bindDN" value="uid=root,dc=frontend"/>
-                            <module-option name="bindCredential" value=""/>
-                            <module-option name="baseCtxDN" value="ou=people,dc=frontend"/>
-                            <module-option name="baseFilter" value="(uid={0})"/>
-                            <module-option name="rolesCtxDN" value="ou=roles,dc=frontend"/>
-                            <module-option name="roleFilter" value="(member={1})"/>
-                            <module-option name="roleAttributeID" value="cn"/>
-                            <module-option name="searchScope" value="ONELEVEL_SCOPE"/>
-                            <module-option name="allowEmptyPasswords" value="true"/>
                         </login-module>
                     </authentication>
                 </security-domain>

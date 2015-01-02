@@ -58,7 +58,7 @@ public class QRCodeServlet extends HttpServlet {
 
 		if (defaultCharacterEncoding != null) {
 			data = new String(data.getBytes("ISO-8859-1"), defaultCharacterEncoding);
-			data = String.format("%s://%s:%s%s/%s;jsessionid=%s", request.getScheme(), "192.168.2.115", request.getServerPort(), request.getContextPath(), "index.html", request.getSession(false).getId());
+			data = String.format("%s://%s:%s%s/%s;jsessionid=%s", request.getScheme(), request.getServerName(), request.getServerPort(), request.getContextPath(), "index.html", request.getSession(false).getId());
 		}
 
 		String output = getParameter(request, "o", "image/gif");

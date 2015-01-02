@@ -1,91 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html 
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<h:body>
-		<h:form>
-			<div>
-
-				<h:commandLink action="#{requestController.logout}" outcome="index.html">Sign Out</h:commandLink>
-
-			</div>
-			<div>
-
-				<div id="voucherslist">
-					
-				</div>
-
-			</div>
-		</h:form>
-		<footer
-			style="clear:both;width:100%;height: 640px;background-color:#555555;">
-
-		</footer>
-        <script type="text/javascript" src="resources/handlebars.js" ></script>
-		<script type="text/javascript">
-		  	function doGeolocation() {
-			    if (navigator.geolocation) {
-			      navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
-			    } else {
-			      positionError(-1);
-			    }
-			}
-		    function positionError(err) {
-		        var msg;
-		        switch(err.code) {
-		          case err.UNKNOWN_ERROR:
-		            msg = "Unable to find your location";
-		            break;
-		          case err.PERMISSION_DENINED:
-		            msg = "Permission denied in finding your location";
-		            break;
-		          case err.POSITION_UNAVAILABLE:
-		            msg = "Your location is currently unknown";
-		            break;
-		          case err.BREAK:
-		            msg = "Attempt to find location took too long";
-		            break;
-		          default:
-		            msg = "Location detection not supported in browser";
-		        }
-		        document.getElementById('info').innerHTML = msg;
-		     }
-		    function positionSuccess(position) {
-		    	
-		    }
-			window.onload = function(){
-				doGeolocation();
-				$.ajax({
-					   url: 'api/vouchers',
-					   data: {
-					      format: 'json'
-					   },
-					   error: function() {
-						   console.log( "error ajax: load. " );
-					   },
-					   dataType: 'json',
-					   success: function(data) {
-						   console.log( "success." );
-				            var Source = document.getElementById('container-template').textContent;
-				            // Compile Template 
-				            var Template = Handlebars.compile(Source);
-				            console.log(data);
-				            $('#voucherslist').html(Template(data));
-					   },
-					   type: 'GET'
-					});
-			};
-		</script>
-	    <script id="container-template" type="x-handlebars-template">
-            <ul id="vouchers">
-           	  {{#each this}}
-               <li><a href="./">item</a></li>
-              {{/each}}
-            </ul>
-        </script>
-	</h:body>
-
+		<c:choose>
+			<c:when test="#{request.isUserInRole('manager')}">
+				<ui:include src="/WEB-INF/securedadmin.xhtml"/>
+			</c:when>
+			<c:otherwise>
+				<ui:include src="/WEB-INF/secureduser.xhtml"/>
+			</c:otherwise>:
+		</c:choose>
 </html>

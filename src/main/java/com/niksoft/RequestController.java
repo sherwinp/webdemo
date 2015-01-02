@@ -3,12 +3,17 @@ package com.niksoft;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.Principal;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.*;
+import javax.security.auth.Subject;
+import javax.security.jacc.PolicyContext;
+import javax.security.jacc.PolicyContextException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,7 +54,7 @@ public class RequestController {
 		return landingPage;
 	}
 
-	public boolean IsInRole(){
+	public boolean IsInRole() throws PolicyContextException{
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		HttpServletRequest request = (HttpServletRequest) context
@@ -57,7 +62,12 @@ public class RequestController {
 		HttpServletResponse response = (HttpServletResponse) context
 				.getExternalContext().getResponse();
 		boolean result = request.getUserPrincipal() != null;
-		log.info(String.format("jsessionid: %s isInRole: %b", request.getSession().getId(), result));
+		log.log(Level.FINE, String.format("jsessionid: %s isInRole: %b", request.getSession().getId(), result));
+		Subject subject = (Subject) PolicyContext.getContext("javax.security.auth.Subject.container");
+		if( subject != null )
+		for (Principal principal : subject.getPrincipals()) {
+			log.log(Level.FINE, "In subject: " + principal.getName());
+		}
 		return result;
 	}
 	
@@ -81,7 +91,9 @@ public class RequestController {
 		return url;
 	}
 
-
+	public String getUsers(){
+		return "users.xhtml?faces-redirect=true&";
+	}
 	  public String getUsername() {
 	    return this.username;
 	  }

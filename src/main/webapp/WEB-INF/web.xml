@@ -21,6 +21,7 @@
         <servlet-name>Resteasy</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+    
     <context-param>
     <param-name>resteasy.servlet.mapping.prefix</param-name>
     <param-value>/api</param-value>
@@ -42,7 +43,7 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.html</url-pattern>	
 	</servlet-mapping>
-   
+	
   <servlet>
     <servlet-name>qrcode</servlet-name>
     <servlet-class>com.d_project.qrcode.web.QRCodeServlet</servlet-class>
@@ -82,7 +83,9 @@
   <security-role>
         <role-name>users</role-name>
   </security-role>   
-  
+    <security-role>
+        <role-name>manager</role-name>
+  </security-role> 
   	<security-constraint>
     <display-name>Restrict direct access to XHTML files</display-name>
     <web-resource-collection>
