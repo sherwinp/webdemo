@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html 
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<header></header>
+	<h:form id="theForm" name="theForm">
+			<nav>
+				<span><h:commandLink action="#{requestController.getUsers}" outcome="users.html">Manage Users</h:commandLink></span>
+				<span><h:commandLink action="vouchers.xhtml">Manage Vouchers</h:commandLink></span>
+				<span><h:commandLink action="stats.xhtml">Voucher Useage</h:commandLink></span>
+				<span><h:commandLink action="#{requestController.logout}" outcome="index.html">Sign Out</h:commandLink></span>
+			</nav>
+			<main>
+				<div id="searchbox">
+					<input id="searchinputbox" type="text" /><input id="searchbutton" type="submit" onclick="return false;" value=""/>
+				</div>
+				<ul id="list">
+				</ul>
+			</main>
+	</h:form>
+	<footer>
+	</footer>
+	<script type="text/javascript" src="resources/handlebars.js" ></script>
+	<script type="javascript">
+
+	</script>
+</h:body>
+</html>
