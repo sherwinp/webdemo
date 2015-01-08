@@ -10,6 +10,7 @@ class QRNumber extends QRData {
 		super(Mode.MODE_NUMBER, data);
 	}
 	
+	@Override
 	public void write(BitBuffer buffer) {
 
 		String data = getData();
@@ -35,6 +36,7 @@ class QRNumber extends QRData {
 		}
 	}
 	
+	@Override
 	public int getLength() {
 		return getData().length();
 	}

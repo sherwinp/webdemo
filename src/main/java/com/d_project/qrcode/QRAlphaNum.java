@@ -10,6 +10,7 @@ class QRAlphaNum extends QRData {
 		super(Mode.MODE_ALPHA_NUM, data);
 	}
 	
+	@Override
 	public void write(BitBuffer buffer) {
 
 		char[] c = getData().toCharArray();
@@ -26,6 +27,7 @@ class QRAlphaNum extends QRData {
 		}
 	}
 	
+	@Override
 	public int getLength() {
 		return getData().length();
 	}

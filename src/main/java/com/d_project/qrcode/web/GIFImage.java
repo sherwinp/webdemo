@@ -192,7 +192,7 @@ class GIFImage {
         }
 
         public int indexOf(String key) {
-            return ( (Integer)map.get(key) ).intValue();
+            return map.get(key).intValue();
         }
         
         public boolean contains(String key) {

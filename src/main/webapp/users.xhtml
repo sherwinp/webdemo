@@ -4,7 +4,14 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
+<h:head>
+	<meta name="viewport"
+		content="height=device-height,width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<link rel="shortcut icon" href="#{request.contextPath}/favicon.ico" />
+	<title>webdemo</title>
+	<link rel="stylesheet" href="resources/style.css" type="text/css" />
+	<script type="text/javascript" src="resources/jquery.min.js"></script>
+</h:head>
 <h:body>
 	<header></header>
 	<h:form id="theForm" name="theForm">
@@ -25,8 +32,31 @@
 	<footer>
 	</footer>
 	<script type="text/javascript" src="resources/handlebars.js" ></script>
-	<script type="javascript">
-
+	<script type="text/javascript">
+	function search(){
+				var searchstring = $('searchinputbox').value;
+				searchstring = searchstring.replace(/[a-z]!/g, 'i');
+				$.ajax({
+					   url: 'api/users',
+					   data: {
+					      format: 'json'
+					   },
+					   error: function() {
+						   console.log( "error ajax: load. " );
+					   },
+					   dataType: 'json',
+					   success: function(data) {
+						   console.log( "success." );
+				            var Source = document.getElementById('container-template').textContent;
+				            // Compile Template 
+				            var Template = Handlebars.compile(Source);
+				            console.log(data);
+				            $('#list').html(Template(data));
+					   },
+					   type: 'GET'
+					});
+	}
+	window.onload = search;
 	</script>
 </h:body>
 </html>

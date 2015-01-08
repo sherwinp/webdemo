@@ -24,6 +24,7 @@ class BitBuffer {
 		return length;
 	}
 	
+	@Override
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < getLengthInBits(); i++) {

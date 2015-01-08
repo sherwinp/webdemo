@@ -12,6 +12,7 @@ class QR8BitByte extends QRData {
 		super(Mode.MODE_8BIT_BYTE, data);
 	}
 	
+	@Override
 	public void write(BitBuffer buffer) {
 
 		try {
@@ -27,6 +28,7 @@ class QR8BitByte extends QRData {
 		}		
 	}
 	
+	@Override
 	public int getLength() {
 		try {
 			return getData().getBytes(QRUtil.getJISEncoding() ).length;

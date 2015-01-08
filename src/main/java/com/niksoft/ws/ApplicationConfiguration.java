@@ -12,6 +12,7 @@ public class ApplicationConfiguration extends Application {
 
 	public ApplicationConfiguration() {
 		singletons.add(new VoucherResource());
+		singletons.add(new UserResource());
 	}
 
 	@Override

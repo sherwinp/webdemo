@@ -12,6 +12,7 @@ class QRKanji extends QRData {
 		super(Mode.MODE_KANJI, data);
 	}
 	
+	@Override
 	public void write(BitBuffer buffer) {
 
 		try {
@@ -48,6 +49,7 @@ class QRKanji extends QRData {
 		}		
 	}
 	
+	@Override
 	public int getLength() {
 		try {
 			return getData().getBytes(QRUtil.getJISEncoding() ).length / 2;

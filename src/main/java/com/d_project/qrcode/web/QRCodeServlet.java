@@ -44,13 +44,15 @@ public class QRCodeServlet extends HttpServlet {
     public QRCodeServlet() {
     }
 
-    public void init(ServletConfig config) throws ServletException {
+    @Override
+	public void init(ServletConfig config) throws ServletException {
 
     	super.init(config);
 
 		defaultCharacterEncoding = getServletConfig().getInitParameter("default-character-encoding");
 	}
 
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
 		

@@ -1,8 +1,7 @@
 package com.niksoft;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -20,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @ManagedBean
 @RequestScoped
-public class RequestController {
+public class RequestController implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(RequestController.class.getName());
 	public RequestController() {
 	};

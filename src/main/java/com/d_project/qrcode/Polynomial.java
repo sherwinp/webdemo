@@ -32,6 +32,7 @@ class Polynomial {
 		return num.length;
 	}
 
+	@Override
 	public String toString() {
 
 		StringBuilder buffer = new StringBuilder();
