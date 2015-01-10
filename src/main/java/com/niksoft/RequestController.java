@@ -22,94 +22,91 @@ import javax.servlet.http.HttpServletResponse;
 public class RequestController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(RequestController.class.getName());
+
 	public RequestController() {
 	};
 
 	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
 
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
-		HttpServletResponse response = (HttpServletResponse) context
-				.getExternalContext().getResponse();
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
 		String landingPage = "index.html";
-		
-		try{
-			
+
+		try {
+			request.getSession().setMaxInactiveInterval(30);
 			request.login(username, password);
 
-		}catch(ServletException ex){
-			
+		} catch (ServletException ex) {
+
 		}
-		
+
 		if (request.getUserPrincipal() == null) {
 			context.addMessage(null, new FacesMessage("Unknown login"));
 			log.info(request.getSession().getId());
 
 		} else {
 			landingPage = "index.html?faces-redirect=true&";
-			log.warning(String.format("!! Authenticated !! %s", request.getUserPrincipal().getName()));
+			log.warning(String.format("!! Authenticated !! %s session: %s", request.getUserPrincipal().getName(), request.getSession().getId()));
 		}
 
 		return landingPage;
 	}
 
-	public boolean IsInRole() throws PolicyContextException{
+	public boolean IsInRole() throws PolicyContextException {
 		FacesContext context = FacesContext.getCurrentInstance();
 
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
-		HttpServletResponse response = (HttpServletResponse) context
-				.getExternalContext().getResponse();
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
 		boolean result = request.getUserPrincipal() != null;
 		log.log(Level.FINE, String.format("jsessionid: %s isInRole: %b", request.getSession().getId(), result));
 		Subject subject = (Subject) PolicyContext.getContext("javax.security.auth.Subject.container");
-		if( subject != null )
-		for (Principal principal : subject.getPrincipals()) {
-			log.log(Level.FINE, "In subject: " + principal.getName());
-		}
+		if (subject != null)
+			for (Principal principal : subject.getPrincipals()) {
+				log.log(Level.FINE, "In subject: " + principal.getName());
+			}
 		return result;
 	}
-	
+
 	public String logout() {
 		log.warning("AuthenticationController.logout: logging - out.");
 		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 		request.getSession().invalidate();
 		return "index.html?faces-redirect=true&";
 	}
-	
+
 	public String getURIId() throws UnsupportedEncodingException {
 		FacesContext context = FacesContext.getCurrentInstance();
 
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
-		HttpServletResponse response = (HttpServletResponse) context
-				.getExternalContext().getResponse();
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
 		String url = String.format("%s", request.getRequestURL());
 		return url;
 	}
 
-	public String getUsers(){
-		return "users.xhtml?faces-redirect=true&";
+	public String getURL(String menuUrl){
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		return menuUrl;
 	}
-	  public String getUsername() {
-	    return this.username;
-	  }
+	
+	public String getUsername() {
+		return this.username;
+	}
 
-	  public void setUsername(String username) {
-	    this.username = username;
-	  }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-	  public String getPassword() {
-	    return this.password;
-	  }
+	public String getPassword() {
+		return this.password;
+	}
 
-	  public void setPassword(String password) {
-	    this.password = password;
-	  }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-	  private String username;
-	  private String password;
+	private String username;
+	private String password;
 }

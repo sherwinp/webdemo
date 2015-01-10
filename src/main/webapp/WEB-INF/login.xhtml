@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
-    "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xml:lang="en">
-	<h:body>
-		<ui:component>
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 		<div>
 			<img id="topbanner" alt="topbanner" src="resources/topb.jpg" />
 		</div>
@@ -16,7 +8,7 @@
 		</div>
 		<div>
 			<div style="float: left; margin: 40px; width: 200px;">
-				<img style=" width:auto; max-width:100%; height:auto;" id="qrcode" alt="qrcode" src="qrcode?s=4" />
+				<img style=" width:auto; max-width:100%; height:auto;" id="qrcode" alt="qrcode" src="qrcode?s=3" />
 			</div>
 			<div style="float: left;">
 				<h:form id="login" name="login" method="post" prependId="false">
@@ -48,7 +40,7 @@
 		<footer style="clear:both;width:100%;height: 640px;background-color:#555555;">
 
 		</footer>
-	    <script type="text/javascript" src="resources/login.js"></script>
+	    <script type="text/javascript" src="resources/scripts/login.js"></script>
 		<script type="text/javascript">
 			window.onload=function main(){
 				console.log('loaded.');
@@ -66,6 +58,4 @@
 				window.setInterval(loginwatch, 6000);
 			};
 		</script>
-		</ui:component>
-	</h:body>
-</html>
+</ui:component>

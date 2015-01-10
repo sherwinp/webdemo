@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xml:lang="en">
-<f:view>
-	<h:head>
-		<meta name="viewport"
-			content="height=device-height,width=device-width, initial-scale=1.0, user-scalable=yes" />
-		<link rel="shortcut icon" href="#{request.contextPath}/favicon.ico" />
-		<title>webdemo</title>
-		<link rel="stylesheet" href="resources/style.css" type="text/css" />
-		<script type="text/javascript" src="resources/jquery.min.js"></script>
-	</h:head>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   template="/WEB-INF/master.xhtml">
+   <ui:define name="content">
 	<ui:include
 		src="#{requestController.IsInRole()?&quot;/WEB-INF/secured.xhtml&quot;:&quot;/WEB-INF/login.xhtml&quot;}" />
-</f:view>
-</html>
+   </ui:define>
+</ui:composition>

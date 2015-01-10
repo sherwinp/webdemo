@@ -26,17 +26,16 @@ public class AuthenticationFilter extends HttpServlet implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,	FilterChain chain) throws IOException, ServletException {
+		log.info("---Do Filter.");
 		
 		chain.doFilter(request, response);
-		
-		log.info("---Do Filter.");
-	
-		HttpServletRequest httpRequest = (HttpServletRequest)request;
-		HttpServletResponse httpResponse = (HttpServletResponse)response;
-		
-		for(String header: httpResponse.getHeaderNames()){
-			log.info(header);
-		}
+//		
+//		HttpServletRequest httpRequest = (HttpServletRequest)request;
+//		HttpServletResponse httpResponse = (HttpServletResponse)response;
+//		
+//		for(String header: httpResponse.getHeaderNames()){
+//			log.info(header);
+//		}
 	}
 
 	@Override

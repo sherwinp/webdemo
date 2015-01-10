@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html 
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
-		<c:choose>
-			<c:when test="#{request.isUserInRole('manager')}">
-				<ui:include src="/WEB-INF/securedadmin.xhtml"/>
-			</c:when>
-			<c:otherwise>
-				<ui:include src="/WEB-INF/secureduser.xhtml"/>
-			</c:otherwise>:
-		</c:choose>
-</html>
+	<ui:include
+		src="#{request.isUserInRole('manager')?&quot;/WEB-INF/securedadmin.xhtml&quot;:&quot;/WEB-INF/secureduser.xhtml&quot;}" />
+</ui:component>

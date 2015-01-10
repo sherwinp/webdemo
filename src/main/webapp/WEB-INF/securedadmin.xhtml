@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html 
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
-<h:body>
 	<header></header>
 	<h:form id="theForm" name="theForm">
 			<nav>
-				<span><h:commandLink action="#{requestController.getUsers}" outcome="users.html">Manage Users</h:commandLink></span>
-				<span><h:commandLink action="vouchers.xhtml">Manage Vouchers</h:commandLink></span>
-				<span><h:commandLink action="stats.xhtml">Voucher Useage</h:commandLink></span>
+				<span><h:commandLink action="." outcome=".">Manage Users</h:commandLink></span>
+				<span><h:commandLink action="." outcome=".">Manage Vouchers</h:commandLink></span>
+				<span><h:commandLink action="." outcome=".">Voucher Useage</h:commandLink></span>
 				<span><h:commandLink action="#{requestController.logout}" outcome="index.html">Sign Out</h:commandLink></span>
 			</nav>
 			<main>
@@ -24,9 +20,7 @@
 	</h:form>
 	<footer>
 	</footer>
-	<script type="text/javascript" src="resources/handlebars.js" ></script>
 	<script type="javascript">
 
 	</script>
-</h:body>
-</html>
+</ui:component>

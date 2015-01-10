@@ -6,6 +6,11 @@
 
 	<display-name>webdemo</display-name>
 
+  <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value>
+  </context-param>
+  
 	<resource-ref>
 		<description>voucherdb</description>
 		<res-ref-name>DemoDSsqlite</res-ref-name>
@@ -42,23 +47,10 @@
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>/faces/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.jsf</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.faces</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
+
 
 	<servlet>
 		<servlet-name>qrcode</servlet-name>
@@ -114,9 +106,9 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>public</web-resource-name>
-			<url-pattern>/index.html</url-pattern>
 			<url-pattern>/favicon.ico</url-pattern>
 			<url-pattern>/resources/*</url-pattern>
+			<url-pattern>/qrcode</url-pattern>
 			<http-method>HEAD</http-method>
 			<http-method>OPTIONS</http-method>
 			<http-method>TRACE</http-method>
@@ -142,7 +134,8 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>secure</web-resource-name>
-			<url-pattern>/index.html</url-pattern>
+			<url-pattern>/*</url-pattern>
+			<url-pattern>/faces/*</url-pattern>
 			<url-pattern>/api/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
