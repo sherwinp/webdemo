@@ -12,7 +12,7 @@ ul#vouchers > li a {vertical-align:40px;}
 ul#vouchers > li img{margin:40px;}
 input#searchinputbox { height:24px; margin-left: 40px; }
 #searchbutton {width:28px; height:28px; 
-                    background-image:url('../resources/search_glass.jpg'); 
+                    background-image:url('../search_glass.jpg'); 
                     background-repeat:no-repeat;    
                     background-position: 0px 0px;
                     background-color: transparent;}

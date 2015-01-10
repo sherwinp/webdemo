@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
    xmlns:ui="http://java.sun.com/jsf/facelets"
-   template="/WEB-INF/master.xhtml">
+   template="/WEB-INF/templates/master.xhtml">
    <ui:define name="content">
 	<ui:include
-		src="#{requestController.IsInRole()?&quot;/WEB-INF/secured.xhtml&quot;:&quot;/WEB-INF/login.xhtml&quot;}" />
+		src="#{requestController.IsInRole()?
+		&quot;/WEB-INF/templates/secured.xhtml&quot;:
+		&quot;/WEB-INF/templates/login.xhtml&quot;}" />
    </ui:define>
 </ui:composition>

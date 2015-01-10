@@ -3,5 +3,5 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<ui:include
-		src="#{request.isUserInRole('manager')?&quot;/WEB-INF/securedadmin.xhtml&quot;:&quot;/WEB-INF/secureduser.xhtml&quot;}" />
+		src="#{request.isUserInRole('manager')?&quot;/WEB-INF/templates/securedadmin.xhtml&quot;:&quot;/WEB-INF/templates/secureduser.xhtml&quot;}" />
 </ui:component>
