@@ -110,6 +110,7 @@
 			<url-pattern>/resources/*</url-pattern>
 			<url-pattern>/qrcode</url-pattern>
 			<url-pattern>/authorized</url-pattern>
+			<url-pattern>/register.xhtml</url-pattern>
 			<http-method>HEAD</http-method>
 			<http-method>OPTIONS</http-method>
 			<http-method>TRACE</http-method>
@@ -124,6 +125,8 @@
 		<web-resource-collection>
 			<web-resource-name>public-login</web-resource-name>
 			<url-pattern>/index.html</url-pattern>
+			<url-pattern>/recover.html</url-pattern>
+			<url-pattern>/register.html</url-pattern>
 			<url-pattern>/j_security_check</url-pattern>
 			<http-method>POST</http-method>
 		</web-resource-collection>
@@ -154,5 +157,10 @@
 			<form-error-page>/index.html</form-error-page>
 		</form-login-config>
 	</login-config>
+
+	<error-page>
+    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+    <location>/index.html</location>
+	</error-page>
 
 </web-app>

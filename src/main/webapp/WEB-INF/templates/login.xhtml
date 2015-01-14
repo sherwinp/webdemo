@@ -1,60 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-		<div>
-			<img id="topbanner" alt="topbanner" src="resources/topb.jpg" />
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<div >
+		<img style="float: right;" src="resources/niksoft.jpg" alt="" />
+	</div>
+	<div id="main-content">
+		<div style="float: left; margin: 40px; width: 200px;">
+			<img style="width: auto; max-width: 100%; height: auto;" id="qrcode"
+				alt="qrcode" src="qrcode?s=3" />
 		</div>
-		<div style="width: 100%; height: 60px;">
-			<img style="float: right;" src="resources/niksoft.jpg" alt="" />
+		<div style="float: left; margin-top: 60px;">
+			<h:form id="theForm" name="theForm" method="post" prependId="false">
+				<label>Log In</label>
+				<span style="padding-left: 10px;"><h:link outcome="recover.html">Forgot Password</h:link></span>
+				<span style="padding-left: 10px;"><h:link outcome="register.html">Register</h:link></span>
+
+				<p>
+					<label for="j_username">User Name:</label>
+					<h:inputText id="j_username" name="j_username" required="true"
+						requiredMessage="Username Required"
+						value="#{requestController.username}" />
+				</p>
+				<p>
+					<label for="j_password">Password:</label>
+					<h:inputSecret id="j_password" name="j_password" required="true"
+						requiredMessage="Password Required"
+						value="#{requestController.password}" />
+				</p>
+				<p>
+					<h:commandButton id="j_security_check"
+						action="#{requestController.login()}" value="Log In" />
+				</p>
+				<p>
+					<h:messages id="messages" errorStyle="color:red;" />
+				</p>
+			</h:form>
 		</div>
-		<div>
-			<div style="float: left; margin: 40px; width: 200px;">
-				<img style=" width:auto; max-width:100%; height:auto;" id="qrcode" alt="qrcode" src="qrcode?s=3" />
-			</div>
-			<div style="float: left;">
-				<h:form id="login" name="login" method="post" prependId="false">
-					<label>Log In</label>
+	</div>
+	<footer
+		style="clear: both; width: 100%; height: 640px; background-color: #555555;">
 
-					<p>
-						<label for="j_username">User Name:</label>
-						<h:inputText id="j_username" name="j_username" required="true" requiredMessage="Username Required" value="#{requestController.username}" />
-					</p>
-					<p>
-						<label for="j_password">Password:</label>
-						<h:inputSecret id="j_password" name="j_password" required="true" requiredMessage="Password Required" value="#{requestController.password}" />
-					</p>
-					<p>
-						<h:commandButton id="j_security_check" action="#{requestController.login()}" value="Log In"  />
-					</p>
-
-					<p>
-						<h:messages id="messages" errorStyle="color:red;" />
-					</p>
-				</h:form>
-			</div>
-
-           <div style="float: left; margin: 40px; width: 200px;">
-           	<img style=" width:auto; max-width:100%; height:auto;" id="testImage" />
-           </div>
-
-		</div>
-		<footer style="clear:both;width:100%;height: 640px;background-color:#555555;">
-
-		</footer>
-		<script type="text/javascript">
-			require(['login'], function(login){
-				console.log('loaded.');
-				var graphicImg = document.getElementById("qrcode");
-				var canvas = document.createElement("canvas");
-				canvas.width = graphicImg.width;
-				canvas.height = graphicImg.height;
-				var context = canvas.getContext("2d");
-				context.drawImage(graphicImg, 0, 0);
-				var base64Image = canvas.toDataURL("image/jpeg");
-				
-				var testImageElement = document.getElementById("testImage");
-				testImageElement.src = base64Image;
-				
-				window.setInterval(login.loginwatch, 6000);
-			});
-		</script>
+	</footer>
+	<script type="text/javascript">
+		require([ 'login' ], function(login) {
+			console.log('loaded.');
+			window.setInterval(login.loginwatch, 6000);
+		});
+	</script>
 </ui:component>

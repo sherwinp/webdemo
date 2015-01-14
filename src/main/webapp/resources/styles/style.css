@@ -11,6 +11,12 @@ nav > span { margin-left: 20px;}
 ul#vouchers > li a {vertical-align:40px;}
 ul#vouchers > li img{margin:40px;}
 input#searchinputbox { height:24px; margin-left: 40px; }
+#main-content { width:100%; height:400px;
+                    background-image:url('../topb.jpg'); 
+                    background-repeat:no-repeat;    
+                    background-position: 0px 0px;
+                    background-size: 100%;
+                    background-color: transparent;}
 #searchbutton {width:28px; height:28px; 
                     background-image:url('../search_glass.jpg'); 
                     background-repeat:no-repeat;    

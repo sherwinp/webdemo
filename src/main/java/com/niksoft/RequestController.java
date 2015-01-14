@@ -67,7 +67,7 @@ public class RequestController implements Serializable {
 			}
 		return result;
 	}
-
+	
 	public String logout() {
 		log.warning("AuthenticationController.logout: logging - out.");
 		FacesContext context = FacesContext.getCurrentInstance();
